@@ -5,8 +5,11 @@ const { Post, Comment, User } = require('../models/');
 router.get('/', async (req, res) => {
   try {
     // TODO: 1. Find all Posts and associated Users
+    const postData = await Post.findAll({include: [User]});
     // TODO: 2. Serialize data (use .get() method, or use raw: true, nest: true in query options)
+    const posts = postData.map((post)=>{post.get({plain:true})});
     // TODO: 3. Render the 'all-posts' template with the posts data
+    res.render('all-posts', { posts })
 
   } catch (err) {
     res.status(500).json(err);
