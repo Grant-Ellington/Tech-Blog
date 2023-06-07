@@ -20,7 +20,9 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
   try {
     // TODO: 1. Find a single Post by primary key and include associated User and Comments (Comment will also need to include a User)
+    const postData = await Post.findByPk()
     // TODO: 2. Serialize data (use .get() method, or use raw: true, nest: true in query options)
+    const posts = postData.map((post)=>{post.get({plain:true})}) 
     // TODO: 3. Render the 'single-post' template with the post data
 
   } catch (err) {

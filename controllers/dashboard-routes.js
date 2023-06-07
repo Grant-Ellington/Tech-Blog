@@ -28,9 +28,11 @@ router.get('/new', withAuth, (req, res) => {
 router.get('/edit/:id', withAuth, async (req, res) => {
   try {
     // TODO: 1. Find a Post by primary key
+    const postData = await Post.findByPk();
     // TODO: 2. Serialize data (use .get() method, or use raw: true, nest: true in query options)
+    const posts  = postData.map((post)=>{post.get({plain: true})})
     // TODO: 3. Render the 'edit-post' template in the 'dashboard' layout with the post data
-
+    res.render('edit-post', posts)
 
   } catch (err) {
     res.redirect('login');
