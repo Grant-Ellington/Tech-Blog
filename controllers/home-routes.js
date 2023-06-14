@@ -24,6 +24,7 @@ router.get('/post/:id', async (req, res) => {
     // TODO: 2. Serialize data (use .get() method, or use raw: true, nest: true in query options)
     const posts = postData.map((post)=>{post.get({plain:true})}) 
     // TODO: 3. Render the 'single-post' template with the post data
+    res.render('single-posts', {posts})
 
   } catch (err) {
     res.status(500).json(err);
